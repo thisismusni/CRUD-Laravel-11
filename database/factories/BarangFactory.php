@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Barang;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +15,16 @@ class BarangFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Barang::class;
     public function definition(): array
     {
         return [
-            //
+            'barcode' => $this->faker->unique()->numerify('####-####-####'),
+            'nama' => $this->faker->word,
+            'departmen' => $this->faker->word,
+            'uom' => $this->faker->word,
+            'stok' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

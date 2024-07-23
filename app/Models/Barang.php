@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Barang extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'barcode',
+        'nama',
+        'departmen',
+        'uom',
+        'stok',
+    ];
 }
