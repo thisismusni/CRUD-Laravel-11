@@ -12,7 +12,8 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Barang::all();
+        return view('barang.index', compact('posts'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('barang.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'barcode' => 'required',
+            'nama' => 'required',
+            'departmen' => 'required',
+            'uom' => 'required',
+            'stok' => 'required|integer',
+        ]);
+
+        Barang::create($request->all());
+        return redirect()->route('barang.index')->with('success', 'Post created successfully.');
     }
 
     /**
@@ -36,7 +46,7 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -44,7 +54,7 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('barang.edit', compact('barang'));
     }
 
     /**
@@ -52,7 +62,16 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     {
-        //
+        $request->validate([
+            'barcode' => 'required',
+            'nama' => 'required',
+            'departmen' => 'required',
+            'uom' => 'required',
+            'stok' => 'required|integer',
+        ]);
+
+        $barang->update($request->all());
+        return redirect()->route('barang.index')->with('success', 'Post updated successfully.');
     }
 
     /**
@@ -60,6 +79,7 @@ class BarangController extends Controller
      */
     public function destroy(Barang $barang)
     {
-        //
+        $barang->delete();
+        return redirect()->route('barang.index')->with('success', 'Post deleted successfully.');
     }
 }
